@@ -36,6 +36,10 @@ module.exports = {
         popover: 'var(--popover-bg)',
         menu: 'var(--menu-bg)',
         'menu-active': 'var(--menu-item-active-bg)',
+        background: 'var(--body-bg)',
+        'background-light': 'var(--background-color-light)',
+        'background-base': 'var(--background-color-base)',
+        'background-dark': 'var(--background-color-dark)',
       },
       fontFamily: {
         sans: 'var(--font-family)',
