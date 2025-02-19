@@ -7,7 +7,7 @@ const StyleTest = () => {
     <Card className="max-w-2xl mx-auto mt-8 p-6">
       <Space direction="vertical" size="large" className="w-full">
         <div>
-          <Title level={3} className="!text-blue-600 font-bold">
+          <Title level={3} className="text-blue-600 font-bold mb-8">
             Typography Test
           </Title>
           <Text className="text-lg text-gray-700 block mb-2">
@@ -19,7 +19,7 @@ const StyleTest = () => {
         </div>
 
         <div>
-          <Title level={4} className="!text-purple-600 !mb-4">
+          <Title level={4} className="text-purple-600 mb-4">
             Button Tests
           </Title>
           <Space className="flex flex-wrap gap-4">
@@ -36,7 +36,7 @@ const StyleTest = () => {
         </div>
 
         <div>
-          <Title level={4} className="!text-indigo-600 !mb-4">
+          <Title level={4} className="text-indigo-600 mb-4">
             Input Tests
           </Title>
           <Space direction="vertical" className="w-full">

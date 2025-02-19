@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs';
 import { ConfigProvider } from 'antd';
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -17,6 +18,8 @@ const AppContent = () => {
       <ConfigProvider
         theme={{
           algorithm,
+          cssVar: true,
+          hashed: false,
           token: {
             colorPrimary: 'var(--primary-color)',
             colorBgContainer: 'var(--background-color-light)',
@@ -28,30 +31,32 @@ const AppContent = () => {
           },
         }}
       >
-        <BrowserRouter>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<MainLayout />}>
-                <Route
-                  index
-                  element={
-                    <ErrorBoundary>
-                      <Home />
-                    </ErrorBoundary>
-                  }
-                />
-                <Route
-                  path="about"
-                  element={
-                    <ErrorBoundary>
-                      <About />
-                    </ErrorBoundary>
-                  }
-                />
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
+        <StyleProvider hashPriority="low">
+          <BrowserRouter>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<MainLayout />}>
+                  <Route
+                    index
+                    element={
+                      <ErrorBoundary>
+                        <Home />
+                      </ErrorBoundary>
+                    }
+                  />
+                  <Route
+                    path="about"
+                    element={
+                      <ErrorBoundary>
+                        <About />
+                      </ErrorBoundary>
+                    }
+                  />
+                </Route>
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </StyleProvider>
       </ConfigProvider>
     </ErrorBoundary>
   );
