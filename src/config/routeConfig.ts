@@ -17,6 +17,12 @@ export const routeConfig = {
     title: 'Unauthorized',
     isPublic: true,
   },
+  register: {
+    routePath: '/register',
+    path: () => '/register',
+    title: 'Register',
+    isPublic: true,
+  },
   login: {
     routePath: '/login',
     path: () => '/login',

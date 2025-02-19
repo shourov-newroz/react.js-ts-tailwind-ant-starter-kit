@@ -31,6 +31,7 @@ const AppContent = () => {
 
   return (
     <ConfigProvider
+      componentSize="large"
       theme={{
         algorithm,
         ...themeConfig,

@@ -7,6 +7,7 @@ const AuthLayout = lazy(() => import('@/components/layouts/AuthLayout'));
 
 const Unauthorized = lazy(() => import('@/pages/Unauthorized'));
 const Login = lazy(() => import('@/pages/auth/Login'));
+const Register = lazy(() => import('@/pages/auth/RegisterPage'));
 
 export const publicRoutes: AppRoute[] = [
   {
@@ -23,6 +24,11 @@ export const publicRoutes: AppRoute[] = [
     element: React.createElement(AuthLayout),
     isLayout: true,
     children: [
+      {
+        routePath: routeConfig.register.routePath,
+        element: React.createElement(Register),
+        isPublic: true,
+      },
       {
         routePath: routeConfig.login.routePath,
         element: React.createElement(Login),
