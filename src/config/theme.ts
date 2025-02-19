@@ -1,6 +1,6 @@
 export const lightTheme = {
   // Colors
-  '--primary-color': '#1890ff', // Ant Design's default blue
+  '--primary-color': '#52c41a',
   '--primary-color-hover': '#40a9ff',
   '--primary-color-active': '#096dd9',
   '--success-color': '#52c41a',
