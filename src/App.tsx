@@ -1,18 +1,22 @@
-import { Button } from 'antd';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainLayout from './components/MainLayout';
+import { ThemeProvider } from './contexts/ThemeContext';
+import About from './pages/About';
+import Home from './pages/Home';
 
-const App = () => (
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-    }}
-  >
-    <Button type='primary' size='large'>
-      text
-    </Button>
-  </div>
-);
+const App = () => {
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+};
 
 export default App;
