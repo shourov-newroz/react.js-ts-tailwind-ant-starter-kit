@@ -7,7 +7,7 @@ const { Title, Paragraph } = Typography;
 const StyleTest = lazy(() => import('../components/StyleTest'));
 const ThemeTest = lazy(() => import('../components/ThemeTest'));
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <div className="p-8">
       <Card className="max-w-2xl mx-auto mb-8">
@@ -35,4 +35,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;
