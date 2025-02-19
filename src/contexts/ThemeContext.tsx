@@ -1,14 +1,17 @@
+import { theme as antTheme } from 'antd';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { applyTheme, darkTheme, lightTheme } from '../config/theme';
 
 interface ThemeContextType {
   isDark: boolean;
   toggleTheme: () => void;
+  algorithm: (typeof antTheme.defaultAlgorithm)[];
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   isDark: false,
   toggleTheme: () => {},
+  algorithm: [antTheme.defaultAlgorithm],
 });
 
 export const useTheme = () => {
@@ -34,11 +37,18 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     applyTheme(theme);
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', isDark);
   }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark((prev) => !prev);
   };
 
-  return <ThemeContext.Provider value={{ isDark, toggleTheme }}>{children}</ThemeContext.Provider>;
+  const algorithm = isDark ? [antTheme.darkAlgorithm] : [antTheme.defaultAlgorithm];
+
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleTheme, algorithm }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };

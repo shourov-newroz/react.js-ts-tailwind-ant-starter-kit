@@ -1,6 +1,8 @@
 import { Button, Layout, Menu } from 'antd';
+import { Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import LoadingSpinner from './loading/LoadingSpinner';
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,7 +37,9 @@ const MainLayout = () => {
         </Button>
       </Header>
       <Content>
-        <Outlet />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Outlet />
+        </Suspense>
       </Content>
       <Footer className="text-center">
         SportsRoz ©{new Date().getFullYear()} Created with Ant Design

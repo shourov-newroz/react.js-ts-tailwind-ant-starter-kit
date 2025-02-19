@@ -1,8 +1,11 @@
 import { Button, Card, Space, Typography } from 'antd';
-import StyleTest from '../components/StyleTest';
-import ThemeTest from '../components/ThemeTest';
+import { Suspense, lazy } from 'react';
+import LoadingSpinner from '../components/loading/LoadingSpinner';
 
 const { Title, Paragraph } = Typography;
+
+const StyleTest = lazy(() => import('../components/StyleTest'));
+const ThemeTest = lazy(() => import('../components/ThemeTest'));
 
 const Home = () => {
   return (
@@ -21,8 +24,13 @@ const Home = () => {
         </Space>
       </Card>
 
-      <StyleTest />
-      <ThemeTest />
+      <Suspense fallback={<LoadingSpinner />}>
+        <StyleTest />
+      </Suspense>
+
+      <Suspense fallback={<LoadingSpinner />}>
+        <ThemeTest />
+      </Suspense>
     </div>
   );
 };
