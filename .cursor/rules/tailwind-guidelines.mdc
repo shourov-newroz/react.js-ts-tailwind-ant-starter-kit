@@ -1,5 +1,5 @@
 ---
-description: Tailwind CSS and ShadcnUI Styling Guidelines
+description: Tailwind CSS Styling Guidelines
 globs: src/**/*.tsx
 ---
 ### **Tailwind CSS Guidelines**
@@ -48,28 +48,7 @@ globs: src/**/*.tsx
   };
   ```
 
-#### **2. ShadcnUI Components**
-- **Component Styling**
-  ```typescript
-  const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, ...props }, ref) => {
-      return (
-        <button
-          className={cn(
-            'inline-flex items-center justify-center rounded-md text-sm font-medium',
-            'focus-visible:outline-none focus-visible:ring-2',
-            'disabled:pointer-events-none disabled:opacity-50',
-            buttonVariants({ variant, size, className })
-          )}
-          ref={ref}
-          {...props}
-        />
-      );
-    }
-  );
-  ```
-
-#### **3. Utility Functions**
+#### **2. Utility Functions**
 - **Class Name Merging**
   ```typescript
   import { type ClassValue, clsx } from 'clsx';
@@ -80,7 +59,7 @@ globs: src/**/*.tsx
   }
   ```
 
-#### **4. Layout Patterns**
+#### **3. Layout Patterns**
 - **Responsive Design**
   ```tsx
   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -100,7 +79,7 @@ globs: src/**/*.tsx
   </div>
   ```
 
-#### **5. Component Variants**
+#### **4. Component Variants**
 - **Style Variants**
   ```typescript
   const buttonVariants = cva(
@@ -126,7 +105,7 @@ globs: src/**/*.tsx
   );
   ```
 
-#### **7. Animation Classes**
+#### **5. Animation Classes**
 - **Transition Effects**
   ```tsx
   <div className="transition-all duration-200 ease-in-out hover:scale-105">
@@ -134,9 +113,8 @@ globs: src/**/*.tsx
   </div>
   ```
 
-#### **8. Best Practices**
+#### **6. Best Practices**
 - Use semantic class names with `cn()` utility
-- Follow ShadcnUI component patterns
 - Maintain consistent spacing scales
 - Use CSS variables for theming
 - Implement responsive designs

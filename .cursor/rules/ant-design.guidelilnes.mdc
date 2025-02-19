@@ -1,0 +1,290 @@
+---
+description: Ant Design Guidelines
+globs: 
+---
+### **Ant Design Guidelines**
+
+#### **1. Configuration & Theme Setup**
+- **Custom Theme Configuration** (`src/theme.ts`)
+  ```typescript
+  import { ThemeConfig } from 'antd';
+
+  export const theme: ThemeConfig = {
+    token: {
+      colorPrimary: '#1890ff',
+      borderRadius: 6,
+      fontFamily: 'Inter, -apple-system, sans-serif',
+    },
+    components: {
+      Button: {
+        colorPrimary: '#4f46e5',
+        algorithm: true, // Enable theme algorithm
+      },
+      Input: {
+        colorBorder: '#d1d5db',
+        hoverBorderColor: '#4f46e5',
+      },
+    },
+  };
+  ```
+
+- **Global Provider Setup**
+  ```tsx
+  import { ConfigProvider } from 'antd';
+  import { theme } from './theme';
+
+  const App = () => (
+    <ConfigProvider
+      theme={theme}
+    >
+      {/* Application components */}
+    </ConfigProvider>
+  );
+  ```
+
+#### **2. Component Usage Patterns**
+- **Standard Component Structure**
+  ```tsx
+  import { Button, Card, Space } from 'antd';
+
+  const DashboardCard = () => (
+    <Card
+      title="Analytics"
+      extra={<Button type="primary">Refresh</Button>}
+      actions={[
+        <Button key="view">View Details</Button>,
+        <Button key="edit">Edit</Button>
+      ]}
+    >
+      <Space direction="vertical">
+        <MetricChart />
+        <DataSummary />
+      </Space>
+    </Card>
+  );
+  ```
+
+#### **3. Form Management**
+- **Form Validation & Submission**
+  ```tsx
+  import { Form, Input, Select, Button } from 'antd';
+
+  const UserForm = () => {
+    const [form] = Form.useForm();
+
+    const onFinish = (values: UserFormValues) => {
+      console.log('Form values:', values);
+    };
+
+    return (
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        initialValues={{ role: 'user' }}
+      >
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: 'Please input username!' }]}
+        >
+          <Input placeholder="Enter username" />
+        </Form.Item>
+
+        <Form.Item
+          label="Role"
+          name="role"
+          rules={[{ required: true }]}
+        >
+          <Select options={[
+            { value: 'admin', label: 'Administrator' },
+            { value: 'user', label: 'Regular User' }
+          ]} />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    );
+  };
+  ```
+
+#### **4. Layout System**
+- **Grid Layout with Responsive Breakpoints**
+  ```tsx
+  import { Row, Col } from 'antd';
+
+  const ResponsiveLayout = () => (
+    <Row gutter={[16, 16]}>
+      <Col xs={24} sm={12} md={8} lg={6} xl={4}>
+        <DashboardWidget />
+      </Col>
+      <Col xs={24} sm={12} md={16} lg={12} xl={8}>
+        <AnalyticsChart />
+      </Col>
+    </Row>
+  );
+  ```
+
+#### **5. Customization Techniques**
+- **Component Style Overrides** (`styles/antd.overrides.less`)
+  ```less
+  @import '~antd/dist/antd.less';
+
+  // Override primary color
+  @primary-color: #4f46e5;
+
+  // Custom card styles
+  .ant-card {
+    &-head {
+      background: @background-color-light;
+    }
+    
+    &-actions {
+      border-top: 1px solid @border-color-split;
+    }
+  }
+  ```
+
+#### **6. Best Practices**
+1. **Component Organization**
+   - Use Ant Design's built-in components before creating custom implementations
+   - Group related components in logical folders (`/components/ui`)
+
+2. **Performance Optimization**
+   ```tsx
+   // Use memoized components for frequently updated UI
+   import { memo } from 'react';
+   const MemoizedTable = memo(Table);
+   ```
+
+3. **Accessibility**
+   - Use semantic HTML with Ant components
+   - Leverage `aria-*` props where needed
+   ```tsx
+   <Button aria-label="Close modal">×</Button>
+   ```
+
+4. **Responsive Patterns**
+   ```tsx
+   import { useBreakpoint } from 'antd';
+
+   const ResponsiveComponent = () => {
+     const screens = useBreakpoint();
+     return (
+       <div>{screens.md ? 'Desktop' : 'Mobile'}</div>
+     );
+   };
+   ```
+
+5. **Consistent Spacing**
+   ```tsx
+   <Space size={[16, 24]} wrap>
+     <Button>Item 1</Button>
+     <Button>Item 2</Button>
+   </Space>
+   ```
+
+6. **Error Handling**
+   ```tsx
+   import { Alert } from 'antd';
+
+   <Alert
+     message="Error Message"
+     description="Detailed error description"
+     type="error"
+     showIcon
+     closable
+   />
+   ```
+
+---
+
+### **Component Development Guidelines**
+
+- **Custom Component Template**
+  ```tsx
+  import { FC } from 'react';
+  import { ButtonProps } from 'antd';
+
+  interface CustomButtonProps extends ButtonProps {
+    highlight?: boolean;
+  }
+
+  const CustomButton: FC<CustomButtonProps> = ({ highlight, ...props }) => (
+    <Button
+      {...props}
+      className={`custom-btn ${highlight ? 'highlight' : ''}`}
+    />
+  );
+  ```
+
+- **Table Best Practices**
+  ```tsx
+  import { Table } from 'antd';
+
+  <Table
+    columns={[
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name),
+      },
+      {
+        title: 'Age',
+        dataIndex: 'age',
+        responsive: ['md'],
+      }
+    ]}
+    dataSource={users}
+    pagination={{ pageSize: 10 }}
+    rowKey="id"
+    scroll={{ x: true }}
+  />
+  ```
+
+---
+
+### **Key Principles**
+
+1. **Consistency**
+   - Use Ant Design's design tokens for spacing, colors, and typography
+   - Follow component API patterns consistently
+
+2. **Type Safety**
+   ```tsx
+   import type { MenuProps } from 'antd';
+
+   const items: MenuProps['items'] = [
+     { key: '1', label: 'Home' },
+     { key: '2', label: 'Profile' }
+   ];
+   ```
+
+3. **Performance**
+   - Virtualize large lists with `rc-virtual-list`
+   - Use `React.memo` for expensive components
+
+4. **Documentation**
+   - Add JSDoc comments for custom props
+   ```tsx
+   interface UserCardProps {
+     /** Display user avatar */
+     showAvatar?: boolean;
+     /** User data object */
+     user: User;
+   }
+   ```
+
+---
+
+This structure provides:  
+✅ Consistent component usage patterns  
+✅ Maintainable theme configuration  
+✅ Responsive layout foundations  
+✅ Type-safe component development  
+✅ Performance-optimized implementations  
+✅ Accessibility-compliant interfaces

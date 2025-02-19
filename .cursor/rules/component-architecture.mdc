@@ -10,7 +10,7 @@ globs: src/components/**/*
 
 #### **1. Component Categories**
 - **UI Components** (`src/components/ui/`)
-  - Shadcn UI components and base elements
+  - Ant Design components and base elements
   - Follow Radix UI primitive patterns
   - Use compound component patterns
   - Maintain accessibility standards
@@ -51,20 +51,6 @@ globs: src/components/**/*
   }
   ```
 
-- **ShadcnUI Patterns**
-  ```typescript
-  const Component = React.forwardRef<HTMLElement, ComponentProps>(
-    ({ className, ...props }, ref) => {
-      return (
-        <div
-          ref={ref}
-          className={cn('base-styles', className)}
-          {...props}
-        />
-      );
-    }
-  );
-  ```
 
 #### **3. Component Organization**
 - **File Structure**

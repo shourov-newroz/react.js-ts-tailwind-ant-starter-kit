@@ -11,7 +11,6 @@ globs:
 #### **Core Directories**
 - **`src/`** → Main source code
   - **`components/`** → React components
-    - **`ui/`** → Shadcn UI components and base UI elements
     - **`common/`** → Shared components
     - **`modals/`** → Modal components
     - **`loading/`** → Loading states and skeletons
@@ -41,7 +40,6 @@ globs:
 #### **Component Structure**
 - Each component should:
   - Use TypeScript with proper type definitions
-  - Follow ShadcnUI patterns where applicable
   - Include proper prop types and documentation
   - Implement error boundaries where needed
   - Use proper loading states
